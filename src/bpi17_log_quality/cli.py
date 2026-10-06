@@ -26,7 +26,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     commands = parser.add_subparsers(dest="command", required=True)
 
-    corrupt = commands.add_parser("corrupt", help="inject deterministic synthetic noise")
+    corrupt = commands.add_parser(
+        "corrupt", help="inject deterministic synthetic noise"
+    )
     corrupt.add_argument("--input", required=True, help="source XES file")
     corrupt.add_argument("--output", required=True, help="destination XES file")
     corrupt.add_argument("--label-rate", type=float, default=0.01)
