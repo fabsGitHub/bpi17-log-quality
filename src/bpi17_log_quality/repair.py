@@ -105,7 +105,7 @@ def repair_timestamps(
     ).transform(lambda values: values.interpolate(limit_direction="both"))
     repaired = pd.to_datetime(
         interpolated.round().astype("Int64"), unit="us", utc=True
-    )
+    ).dt.as_unit("ns")
 
     sentinel = pd.Timestamp.min.tz_localize("UTC")
     original_ns = original.dt.as_unit("ns")
