@@ -38,7 +38,9 @@ def inject_label_id_noise(
             suffix = str(event_ids.iloc[position]).rsplit("_", maxsplit=1)[-1]
         else:
             suffix = str(position + 1)
-        result.iat[position, result.columns.get_loc(activity_column)] = f"{label}: {suffix}"
+        result.iat[
+            position, result.columns.get_loc(activity_column)
+        ] = f"{label}: {suffix}"
     return result, len(selected)
 
 
