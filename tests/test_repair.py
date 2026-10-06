@@ -75,6 +75,7 @@ def test_repair_timestamps_corrects_inversion_interpolates_and_preserves_empty_c
                 None,
             ],
             utc=True,
+            format="mixed",
         ),
         name="time:timestamp",
     )
