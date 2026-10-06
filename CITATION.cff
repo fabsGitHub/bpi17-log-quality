@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository and the BPI Challenge 2017 dataset."
+type: software
+title: "BPI17 Log Quality"
+authors:
+  - family-names: Hensel
+    given-names: Fabian
+version: 0.1.0
+repository-code: "https://github.com/fabsGitHub/bpi17-log-quality"
+keywords:
+  - process mining
+  - event logs
+  - data quality
+  - BPI Challenge 2017
+license: "NOASSERTION"
+
