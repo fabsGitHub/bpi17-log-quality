@@ -110,7 +110,9 @@ def repair_timestamps(
     sentinel = pd.Timestamp.min.tz_localize("UTC")
     original_ns = original.dt.as_unit("ns")
     repaired_ns = repaired.dt.as_unit("ns")
-    changed = int(original_ns.fillna(sentinel).ne(repaired_ns.fillna(sentinel)).sum())
+    changed = int(
+        original_ns.fillna(sentinel).ne(repaired_ns.fillna(sentinel)).sum()
+    )
     result[timestamp_column] = pd.Series(repaired.array, index=result.index)
     return result, changed
 
