@@ -79,7 +79,7 @@ def test_repair_timestamps_corrects_inversion_interpolates_and_preserves_empty_c
         ),
         name="time:timestamp",
     )
-    assert changed == 2
+    assert changed == 2, f"changed={changed}; timestamps={repaired['time:timestamp'].tolist()}"
     assert_series_equal(repaired["time:timestamp"], expected)
     assert repaired["time:timestamp"].iloc[4:].isna().all()
     assert_frame_equal(frame, original)
