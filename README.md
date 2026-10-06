@@ -1,5 +1,7 @@
 # BPI17 Log Quality
 
+[![CI](https://github.com/fabsGitHub/bpi17-log-quality/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/fabsGitHub/bpi17-log-quality/actions/workflows/ci.yml)
+
 A reproducible Python workflow for injecting and repairing two common event-log
 quality issues: timestamp anomalies and activity labels polluted with numeric
 event IDs. The project is based on contributions to the BPI Challenge 2017
@@ -18,9 +20,11 @@ work.
 ## Project layout
 
 ```text
-data/                  Dataset instructions; local logs are ignored
-docs/                  Methodology and limitations
-src/bpi17_log_quality/ XES I/O, noise generation, repair, metrics, and CLI
+data/                     Dataset instructions; local logs are ignored
+docs/                     Methodology and limitations
+src/bpi17_log_quality/    XES I/O, noise generation, repair, metrics, and CLI
+tests/                    Dataset-independent unit tests
+.github/workflows/ci.yml  Automated quality checks
 ```
 
 ## Requirements
@@ -41,6 +45,22 @@ source .venv/bin/activate        # Windows PowerShell: .\\.venv\\Scripts\\Activa
 python -m pip install --upgrade pip
 python -m pip install -e .
 ```
+
+## Validate changes
+
+Install the optional development tools and run the same checks used by CI:
+
+```bash
+python -m pip install -e ".[dev]"
+ruff check .
+pytest -q
+python -m compileall -q src tests
+bpi17-quality --help
+```
+
+GitHub Actions runs these checks on Python 3.10 and 3.12 for pull requests and
+updates to `main`. The tests use small synthetic event rows; they do not
+download or require the BPI Challenge dataset.
 
 ## Run the workflow
 
@@ -75,8 +95,9 @@ The timestamp repair uses input order within each case as a heuristic signal. It
 only accepts a day/month swap when it reduces backwards transitions. Missing
 values are interpolated by row position between known timestamps. Those choices
 fit the synthetic patterns this project demonstrates, but they are not safe
-assumptions for every real process log. Review [`docs/methodology.md`](docs/methodology.md)
-before applying the repairs to another dataset.
+assumptions for every real process log. Review
+[`docs/methodology.md`](docs/methodology.md) before applying the repairs to
+another dataset.
 
 No discovery, conformance-checking, or performance-analysis results are claimed
 here. The public version focuses on reproducible data-quality preparation.
@@ -86,8 +107,8 @@ here. The public version focuses on reproducible data-quality preparation.
 This is a focused rework of timestamp and activity-label contributions from a
 university team project. Other team members' modules, notebooks, reports, and
 the original commit history are not included. See [`NOTICE.md`](NOTICE.md) for
-the scope and attribution note and [`CITATION.cff`](CITATION.cff) for a software
-citation.
+the scope and attribution note and [`CITATION.cff`](CITATION.cff) for a
+software citation.
 
 The BPI Challenge 2017 event log is a separate 4TU.ResearchData dataset. Its
 full citation and source are listed in [`data/README.md`](data/README.md); no
