@@ -42,7 +42,14 @@ def test_repair_activity_labels_removes_only_numeric_suffixes_without_mutating_i
 def test_repair_timestamps_corrects_inversion_interpolates_and_preserves_empty_cases():
     frame = pd.DataFrame(
         {
-            "case:concept:name": ["case-a", "case-a", "case-a", "case-a", "case-b", "case-b"],
+            "case:concept:name": [
+                "case-a",
+                "case-a",
+                "case-a",
+                "case-a",
+                "case-b",
+                "case-b",
+            ],
             "time:timestamp": [
                 "2020-03-15",
                 "2020-02-04",
@@ -140,3 +147,4 @@ def test_profile_reports_missing_invalid_and_out_of_order_values():
         "out_of_order_transitions": 1,
         "duplicate_case_activity_timestamp_rows": 0,
     }
+
